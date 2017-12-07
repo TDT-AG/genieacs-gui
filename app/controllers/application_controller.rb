@@ -107,7 +107,7 @@ class ApplicationController < ActionController::Base
 
     users.each do |user|
       Rails.configuration.users[user.username] = Hash.new
-      Rails.configuration.users[user.username]["password"] = user.password
+      Rails.configuration.users[user.username]["password"] = user.password_digest
       Rails.configuration.users[user.username]["roles"] = Array.new
       user.roles.each do |role|
         Rails.configuration.users[user.username]["roles"].push(role.name)

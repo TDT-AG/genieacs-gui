@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if (Rails.configuration.users[params[:username]]['password'] == params[:password] rescue false)
+    user = User.find_by(username: params[:username])
+    if (user.authenticate(params[:password]) rescue false)
       session[:username] = params[:username]
       redirect_to params[:url]
     else

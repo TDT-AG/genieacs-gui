@@ -11,7 +11,7 @@ class ChangePasswordController < ApplicationController
       return
     end
 
-    if user['password'] != params['old_password']
+    if not user.authenticate(params['old_password'])
       flash[:error] = "Incorrect username or password"
       redirect_to change_password_path
       return
